@@ -101,6 +101,39 @@ public class Main {
                 case 5:
                     imprimirMenu();
                     break;
+                case 6:
+                    if (playlist.isEmpty()) {
+                        System.out.println("La playlist está vacía, no hay canciones para eliminar.");
+                    } else {
+                        if (haciaAdelante) {
+                            if (it.hasPrevious()) {
+                                System.out.println("Eliminando la canción actual: " + it.next().getTitulo());
+                                it.remove();
+                                if (it.hasNext()) {
+                                    System.out.println("Reproduciendo la siguiente canción: " + it.next().getTitulo());
+                                } else {
+                                    it.previous();
+                                    System.out.println("No hay siguiente canción. Reproduciendo la canción previa: " + it.previous().getTitulo());
+                                }
+                            } else {
+                                System.out.println("No hay canción actual para eliminar.");
+                            }
+                        } else {
+                            if (it.hasNext()) {
+                                System.out.println("Eliminando la canción actual: " + it.previous().getTitulo());
+                                it.remove();
+                                if (it.hasPrevious()) {
+                                    System.out.println("Reproduciendo la canción previa: " + it.previous().getTitulo());
+                                } else {
+                                    it.next();
+                                    System.out.println("No hay canción previa. Reproduciendo la siguiente canción: " + it.next().getTitulo());
+                                }
+                            } else {
+                                System.out.println("No hay canción actual para eliminar.");
+                            }
+                        }
+                    }
+                    break;
             }
         } while (opcion != 0);
     }
